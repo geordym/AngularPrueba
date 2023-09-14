@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MedicosCreateComponent } from './components/medicos-create/medicos-create.component';
 import { MedicosUpdateComponent } from './components/medicos-update/medicos-update.component';
 import { FormsModule } from '@angular/forms';
+import { MedicosSearchComponent } from './components/medicos-search/medicos-search.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     MedicosListComponent,
     MedicosCreateComponent,
-    MedicosUpdateComponent
+    MedicosUpdateComponent,
+    MedicosSearchComponent
   ],
   providers: [
     MedicosService
