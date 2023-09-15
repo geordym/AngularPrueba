@@ -1,5 +1,5 @@
 <!-- medicos-create.component.html -->
-<button class="btn btn-primary" (click)="open(content)">Crear Medico</button>
+<button class="btn btn-info" (click)="open(content)">Crear Medico</button>
 
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -20,6 +20,14 @@
           name="apellidos"
           [(ngModel)]="medico.apellidos">
       </div>
+
+      <div class="mb-3">
+        <label for="apellidos">Cedula</label>
+        <input type="text" class="form-control" id="cedula"
+          name="cedula"
+          [(ngModel)]="medico.cedula">
+      </div>
+
       <div class="mb-3">
         <label for="telefono">Teléfono</label>
         <input type="number" class="form-control" id="telefono"

@@ -21,6 +21,7 @@ export class MedicosCreateComponent {
   medico: Medico = {
     nombres: "",
     apellidos: "",
+    cedula: 0,
     telefono: 0,
     carrera: "",
     pais: ""

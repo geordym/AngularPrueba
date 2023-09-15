@@ -1,0 +1,64 @@
+<!-- facturas-create.component.html -->
+<button class="btn btn-primary" (click)="open(content)">Crear Factura</button>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Crear Factura</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="facturaForm" (ngSubmit)="guardarFactura()">
+
+      <div class="mb-3">
+        <label for="Cita" class="mr-2">Fecha</label>
+        <input type="date" class="form-control" formControlName="fecha" [(ngModel)]="factura.fecha">
+        <div class="invalid-feedback" *ngIf="facturaForm.get('fecha')?.invalid && facturaForm.get('fecha')?.touched">La fecha es obligatoria.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Nombre Cliente</label>
+        <input type="text" class="form-control" formControlName="nombre_cliente" [(ngModel)]="factura.nombre_cliente">
+        <div class="invalid-feedback" *ngIf="facturaForm.get('nombre_cliente')?.invalid && facturaForm.get('nombre_cliente')?.touched">El nombre del cliente es obligatorio.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Cedula</label>
+        <input type="text" class="form-control" formControlName="cedula" [(ngModel)]="factura.cedula">
+        <div class="invalid-feedback" *ngIf="facturaForm.get('cedula')?.invalid && facturaForm.get('cedula')?.touched">La cédula es obligatoria.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Especialidad</label>
+        <input type="text" class="form-control" formControlName="especialidad" [(ngModel)]="factura.especialidad">
+        <div class="invalid-feedback" *ngIf="facturaForm.get('especialidad')?.invalid && facturaForm.get('especialidad')?.touched">La especialidad es obligatoria.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cita">Medico</label>
+        <select class="form-select" formControlName="cedula_medico" [(ngModel)]="factura.cedula_medico">
+          <option [value]="medico.cedula" *ngFor="let medico of medicos">{{medico.nombres}}</option>
+        </select>
+        <div class="invalid-feedback" *ngIf="facturaForm.get('cedula_medico')?.invalid && facturaForm.get('cedula_medico')?.touched">Debes seleccionar un médico.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Estado</label>
+        <select class="form-select" formControlName="estado" [(ngModel)]="factura.estado">
+          <option value="P">Pagado</option>
+          <option value="PP">Pago Pendiente</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Precio</label>
+        <input type="number" class="form-control" formControlName="precio" [(ngModel)]="factura.precio">
+        <div class="invalid-feedback" *ngIf="facturaForm.get('precio')?.invalid && facturaForm.get('precio')?.touched">El precio debe ser mayor que cero.</div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark" [disabled]="facturaForm.invalid"
+          (click)="modal.close('Save click')">Save</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

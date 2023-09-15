@@ -1,0 +1,42 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Cita</th>
+      <th>Fecha</th>
+      <th>Cliente</th>
+      <th>Cedula</th>
+      <th>Especialidad</th>
+      <th>Cedula Medico</th>
+      <th>Estado</th>
+      <th>Precio</th>
+
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let factura of facturas">
+      <td>{{ factura.id }}</td>
+      <td>{{ factura.id_cita }}</td>
+      <td>{{ factura.fecha }}</td>
+      <td>{{ factura.nombre_cliente }}</td>
+      <td>{{ factura.cedula }}</td>
+      <td>{{ factura.especialidad }}</td>
+      <td>{{ factura.cedula_medico }}</td>
+      <td>
+
+        <label [ngClass]="factura.estado === 'P' ? 'btn btn-success' : 'btn btn-danger'">
+          {{ factura.estado === 'P' ? 'Pagado' : (factura.estado === 'PP' ? 'Pendiente' : 'Estado Desconocido') }} </label>
+        </td>
+            <td>{{ factura.precio }}</td>
+
+      <td>
+        <app-facturas-update [factura]="factura"></app-facturas-update>
+        <button class="btn btn-danger"
+          (click)="(facturasService.eliminarFactura(factura.id!))">
+          <svg [cIcon]="icons.cilTrash" width="20" title="Trash Icon"></svg>
+          </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

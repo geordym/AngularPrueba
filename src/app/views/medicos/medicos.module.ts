@@ -9,6 +9,7 @@ import { MedicosCreateComponent } from './components/medicos-create/medicos-crea
 import { MedicosUpdateComponent } from './components/medicos-update/medicos-update.component';
 import { FormsModule } from '@angular/forms';
 import { MedicosSearchComponent } from './components/medicos-search/medicos-search.component';
+import { IconModule, IconSetService } from '@coreui/icons-angular';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { MedicosSearchComponent } from './components/medicos-search/medicos-sear
     HttpClientModule,
     MedicosRoutingModule,
     FormsModule,
+    IconModule
   ],
   exports: [HomeComponent],
   declarations: [
@@ -27,7 +29,8 @@ import { MedicosSearchComponent } from './components/medicos-search/medicos-sear
     MedicosSearchComponent
   ],
   providers: [
-    MedicosService
+    MedicosService,
+    IconSetService
   ],
 })
 export class MedicosModule { }

@@ -32,6 +32,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/medicos/medicos.module').then((m) => m.MedicosModule)
       },
+
+      {
+        path: 'facturas',
+        loadChildren: () =>
+          import('./views/facturas/facturas.module').then((m) => m.FacturasModule)
+      },
+
       {
         path: 'theme',
         loadChildren: () =>

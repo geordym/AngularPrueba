@@ -1,9 +1,10 @@
 <table class="table">
-  <thead>
+  <thead class="custom-background">
     <tr>
       <th>ID</th>
       <th>Nombres</th>
       <th>Apellidos</th>
+      <th>Cedula</th>
       <th>Teléfono</th>
       <th>Carrera</th>
       <th>País</th>
@@ -15,13 +16,16 @@
       <td>{{ medico.id }}</td>
       <td>{{ medico.nombres }}</td>
       <td>{{ medico.apellidos }}</td>
+      <td>{{ medico.cedula }}</td>
       <td>{{ medico.telefono }}</td>
       <td>{{ medico.carrera }}</td>
       <td>{{ medico.pais }}</td>
       <td>
         <app-medicos-update [medico]="medico"></app-medicos-update>
-        <button class="btn btn-danger" (click)="(medicosService.eliminarMedico(medico.id!))">Borrar</button>
-      </td>
+        <button class="btn btn-danger" (click)="(medicosService.eliminarMedico(medico.id!))">
+          <svg [cIcon]="icons.cilTrash" width="20" title="Trash Icon"></svg>
+          Borrar</button>
+
     </tr>
   </tbody>
 </table>

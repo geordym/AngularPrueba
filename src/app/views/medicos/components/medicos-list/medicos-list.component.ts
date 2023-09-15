@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Medico } from '../../interfaces/medico.interface';
 import { MedicosService } from '../../services/medicos.service';
+import { IconSetService } from '@coreui/icons-angular';
+
+import { cilListNumbered, cilPaperPlane, brandSet, freeSet } from '@coreui/icons';
+
 
 @Component({
   selector: 'app-medicos-list',
@@ -10,26 +14,19 @@ import { MedicosService } from '../../services/medicos.service';
 export class MedicosListComponent {
 
 
+  icons = freeSet ;
+
+
   @Input()
   public medicos:Medico[] = [];
 
-  constructor(public medicosService: MedicosService){}
+  constructor(public medicosService: MedicosService,  public iconSet: IconSetService){
+    iconSet.icons = { cilListNumbered, cilPaperPlane, ...brandSet };
 
-
-
-   cloneMedico(original: Medico): Medico {
-    // Realiza una clonación manual de las propiedades del objeto original
-    const clonedMedico: Medico = {
-      id: original.id,
-      nombres: original.nombres,
-      apellidos: original.apellidos,
-      telefono: original.telefono,
-      carrera: original.carrera,
-      pais: original.pais
-
-      // Copia otras propiedades según sea necesario
-    };
-    return clonedMedico;
   }
+
+
+
+
 
 }

@@ -1,57 +1,61 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Medico } from '../interfaces/medico.interface';
+import { Factura } from '../interfaces/factura.interface';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class MedicosService {
+@Injectable({ providedIn: 'root' })
+export class FacturasService {
+
+
 
   constructor(private http: HttpClient) {
-    this.cargarMedicos();
-  }
 
-
-
-
-  private _medicos: Medico[] = [];
-  private _medicosFiltrado: Medico[] = [];
-
-
-  private serviceUrl: string = 'http://localhost:80/sistemamedicos/medicos.php';
-
-
-  get medicos() {
-    return [...this._medicos];
+    this.cargarFacturas();
   }
 
 
 
 
 
-  filtrar(cadena: string){
+
+
+
+  private _facturas: Factura[] = [];
+
+
+  private serviceUrl: string = 'http://localhost:80/sistemamedicos/facturas.php';
+
+
+  get facturas() {
+    return [...this._facturas];
+  }
+
+
+
+
+
+  filtrar(cadena: string) {
 
   }
 
 
-  async cargarMedicos(): Promise<void> {
+  async cargarFacturas(): Promise<void> {
 
 
     const params = new HttpParams()
       .set('limit', '10')
       .set('q', 'asd');
 
-    this.http.get<Medico[]>(`${this.serviceUrl}`, { params })
+    this.http.get<Factura[]>(`${this.serviceUrl}`, { params })
       .subscribe(resp => {
 
-        this._medicos = resp;
+        this._facturas = resp;
       });
 
 
   }
 
 
-  async eliminarMedico(id: number) {
+  async eliminarFactura(id: number) {
 
     const params = new HttpParams()
       .set('id', id);
@@ -64,11 +68,11 @@ export class MedicosService {
     };
 
     // Realiza la solicitud POST con el cuerpo JSON
-    return this.http.delete<string>(`${this.serviceUrl}`, {params})
+    return this.http.delete<string>(`${this.serviceUrl}`, { params })
       .toPromise()
       .then(response => {
         // Aquí puedes manejar la respuesta si es necesario
-        this.cargarMedicos();
+        this.cargarFacturas();
         return response;
       })
       .catch(error => {
@@ -78,9 +82,9 @@ export class MedicosService {
 
   }
 
-  async crearMedico(medico: Medico): Promise<any> {
+  async crearFactura(factura: Factura): Promise<any> {
     // Convierte el objeto 'medico' a una cadena JSON
-    const medicoJSON = JSON.stringify(medico);
+    const facturaJSON = JSON.stringify(factura);
 
     // Define las cabeceras de la solicitud para indicar que se está enviando JSON
     const httpOptions = {
@@ -90,11 +94,11 @@ export class MedicosService {
     };
 
     // Realiza la solicitud POST con el cuerpo JSON
-    return this.http.post<string>(`${this.serviceUrl}`, medicoJSON, httpOptions)
+    return this.http.post<string>(`${this.serviceUrl}`, facturaJSON, httpOptions)
       .toPromise()
       .then(response => {
         // Aquí puedes manejar la respuesta si es necesario
-        this.cargarMedicos();
+        this.cargarFacturas();
         return response;
       })
       .catch(error => {
@@ -104,9 +108,9 @@ export class MedicosService {
 
   }
 
-  async editarMedico(medico: Medico): Promise<any> {
+  async editarFactura(factura: Factura): Promise<any> {
     // Convierte el objeto 'medico' a una cadena JSON
-    const medicoJSON = JSON.stringify(medico);
+    const facturaJSON = JSON.stringify(factura);
 
     // Define las cabeceras de la solicitud para indicar que se está enviando JSON
     const httpOptions = {
@@ -116,11 +120,11 @@ export class MedicosService {
     };
 
     // Realiza la solicitud POST con el cuerpo JSON
-    return this.http.put<string>(`${this.serviceUrl}`, medicoJSON, httpOptions)
+    return this.http.put<string>(`${this.serviceUrl}`, facturaJSON, httpOptions)
       .toPromise()
       .then(response => {
         // Aquí puedes manejar la respuesta si es necesario
-        this.cargarMedicos();
+        this.cargarFacturas();
         return response;
       })
       .catch(error => {
@@ -129,9 +133,6 @@ export class MedicosService {
       });
 
   }
-
-
-
 
 
 }

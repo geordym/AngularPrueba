@@ -1,5 +1,35 @@
 
-<app-medicos-search></app-medicos-search>
+<div class="container border border-info">
+  <div class="row custom-background">
 
-<app-medicos-create></app-medicos-create>
-<app-medicos-list [medicos]="medicosService.medicos"></app-medicos-list>
+    <div class="col-md-10">
+      <label class="display-4">Buscar facturas</label>
+
+    </div>
+
+    <div class="col-md-2"> <!-- Cambia el tamaño aquí -->
+
+      <div class="pt-3">
+        <app-medicos-create></app-medicos-create>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-6"> <!-- Cambia el tamaño aquí -->
+      <app-medicos-search></app-medicos-search>
+
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <app-medicos-list [medicos]="medicosService.medicos"></app-medicos-list>
+
+    </div>
+
+  </div>
+</div>
+
+

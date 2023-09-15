@@ -1,57 +1,61 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Medico } from '../interfaces/medico.interface';
+import { Cita } from '../interfaces/cita.interface';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class MedicosService {
+@Injectable({ providedIn: 'root' })
+export class CitasService {
+
+
 
   constructor(private http: HttpClient) {
-    this.cargarMedicos();
-  }
 
-
-
-
-  private _medicos: Medico[] = [];
-  private _medicosFiltrado: Medico[] = [];
-
-
-  private serviceUrl: string = 'http://localhost:80/sistemamedicos/medicos.php';
-
-
-  get medicos() {
-    return [...this._medicos];
+    this.cargarCitas();
   }
 
 
 
 
 
-  filtrar(cadena: string){
+
+
+
+  private _citas: Cita[] = [];
+
+
+  private serviceUrl: string = 'http://localhost:80/sistemamedicos/citas.php';
+
+
+  get citas() {
+    return [...this._citas];
+  }
+
+
+
+
+
+  filtrar(cadena: string) {
 
   }
 
 
-  async cargarMedicos(): Promise<void> {
+  async cargarCitas(): Promise<void> {
 
 
     const params = new HttpParams()
       .set('limit', '10')
       .set('q', 'asd');
 
-    this.http.get<Medico[]>(`${this.serviceUrl}`, { params })
+    this.http.get<Cita[]>(`${this.serviceUrl}`, { params })
       .subscribe(resp => {
 
-        this._medicos = resp;
+        this._citas = resp;
       });
 
 
   }
 
 
-  async eliminarMedico(id: number) {
+  async eliminarFactura(id: number) {
 
     const params = new HttpParams()
       .set('id', id);
@@ -64,11 +68,11 @@ export class MedicosService {
     };
 
     // Realiza la solicitud POST con el cuerpo JSON
-    return this.http.delete<string>(`${this.serviceUrl}`, {params})
+    return this.http.delete<string>(`${this.serviceUrl}`, { params })
       .toPromise()
       .then(response => {
         // Aquí puedes manejar la respuesta si es necesario
-        this.cargarMedicos();
+        this.cargarCitas();
         return response;
       })
       .catch(error => {
@@ -78,9 +82,9 @@ export class MedicosService {
 
   }
 
-  async crearMedico(medico: Medico): Promise<any> {
+  async crearFactura(cita: Cita): Promise<any> {
     // Convierte el objeto 'medico' a una cadena JSON
-    const medicoJSON = JSON.stringify(medico);
+    const citaJSON = JSON.stringify(cita);
 
     // Define las cabeceras de la solicitud para indicar que se está enviando JSON
     const httpOptions = {
@@ -90,11 +94,11 @@ export class MedicosService {
     };
 
     // Realiza la solicitud POST con el cuerpo JSON
-    return this.http.post<string>(`${this.serviceUrl}`, medicoJSON, httpOptions)
+    return this.http.post<string>(`${this.serviceUrl}`, citaJSON, httpOptions)
       .toPromise()
       .then(response => {
         // Aquí puedes manejar la respuesta si es necesario
-        this.cargarMedicos();
+        this.cargarCitas();
         return response;
       })
       .catch(error => {
@@ -104,9 +108,9 @@ export class MedicosService {
 
   }
 
-  async editarMedico(medico: Medico): Promise<any> {
+  async editarFactura(cita: Cita): Promise<any> {
     // Convierte el objeto 'medico' a una cadena JSON
-    const medicoJSON = JSON.stringify(medico);
+    const citasJSON = JSON.stringify(cita);
 
     // Define las cabeceras de la solicitud para indicar que se está enviando JSON
     const httpOptions = {
@@ -116,11 +120,11 @@ export class MedicosService {
     };
 
     // Realiza la solicitud POST con el cuerpo JSON
-    return this.http.put<string>(`${this.serviceUrl}`, medicoJSON, httpOptions)
+    return this.http.put<string>(`${this.serviceUrl}`, citasJSON, httpOptions)
       .toPromise()
       .then(response => {
         // Aquí puedes manejar la respuesta si es necesario
-        this.cargarMedicos();
+        this.cargarCitas();
         return response;
       })
       .catch(error => {
@@ -129,9 +133,6 @@ export class MedicosService {
       });
 
   }
-
-
-
 
 
 }

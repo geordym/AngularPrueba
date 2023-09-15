@@ -22,7 +22,6 @@ export const navItems: INavData[] = [
   {
     name: 'Facturas',
     url: '/facturas',
-    linkProps: { fragment: 'someAnchor' },
     iconComponent: { name: 'cil-pencil' }
   },
   {
