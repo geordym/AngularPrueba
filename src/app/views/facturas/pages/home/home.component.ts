@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FacturasService } from '../../services/facturas.service';
-import { CitasService } from '../../services/citas.service';
+import { CitasService } from '../../../citas/services/citas.service';
 import { MedicosService } from 'src/app/views/medicos/services/medicos.service';
 
 @Component({

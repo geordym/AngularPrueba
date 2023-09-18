@@ -24,12 +24,22 @@ export const navItems: INavData[] = [
     url: '/facturas',
     iconComponent: { name: 'cil-pencil' }
   },
+
   {
-    name: 'Citas',
-    url: '/theme/buttons',
-    linkProps: { fragment: 'someAnchor' },
+    name: 'Egresos',
+    url: '/egresos',
     iconComponent: { name: 'cil-pencil' }
   },
+
+  {
+    name: 'Citas',
+    url: '/citas',
+    iconComponent: { name: 'cil-pencil' }
+  },
+
+
+
+
 
 
 

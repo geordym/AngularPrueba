@@ -1,0 +1,17 @@
+<div class="row p-3">
+
+  <!--Busqueda-->
+  <div class="col-3">
+
+    <!-- <gifs-search-box></gifs-search-box> -->
+    <app-search-box></app-search-box>
+  </div>
+
+  <!--Listado de gifs-->
+  <div class="col-12 pt-2">
+
+
+    <app-citas-list [citas]="citasService.citas"></app-citas-list>
+  </div>
+
+</div>

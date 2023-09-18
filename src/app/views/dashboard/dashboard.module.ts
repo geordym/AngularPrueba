@@ -21,6 +21,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
 import { WidgetsModule } from '../widgets/widgets.module';
+import { DashboardService } from './services/dashboard.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -40,9 +42,13 @@ import { WidgetsModule } from '../widgets/widgets.module';
     ChartjsModule,
     AvatarModule,
     TableModule,
-    WidgetsModule
+    WidgetsModule,
+    HttpClientModule, // Asegúrate de incluir HttpClientModule aquí
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent],
+  providers: [
+    DashboardService
+  ]
 })
 export class DashboardModule {
 }

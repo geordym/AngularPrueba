@@ -4,11 +4,15 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { getStyle } from '@coreui/utils';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
+import { Dashboard } from '../../dashboard/interfaces/dashboard.interface';
 
 @Component({
   selector: 'app-widgets-dropdown',
@@ -16,16 +20,144 @@ import { ChartjsComponent } from '@coreui/angular-chartjs';
   styleUrls: ['./widgets-dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
+export class WidgetsDropdownComponent implements OnInit, AfterContentInit, OnChanges {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) { }
+
+  dataTest: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+
+
+
+
+
+
+
+
+  private setDataFromDashboard() {
+    const dataset = this._dashboard.dashboard.cantidad_medicos.dataset || [];
+    this.data[0] = [{
+      label: 'Medico2s',
+      backgroundColor: 'transparent',
+      borderColor: 'rgba(255,255,255,.55)',
+      pointBackgroundColor: getStyle('--cui-primary'),
+      pointHoverBorderColor: getStyle('--cui-primary'),
+      data: dataset
+    }];
+  }
+
+
+  @Input()
+  _dashboard!: Dashboard;
+
+
+  dataMedico = {
+    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'July', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    datasets: [
+      {
+        label: "Medicos Registrandose",
+        backgroundColor: '#f87979',
+        data: [1, 2, 3],
+      }
+    ]
+  };
+
+  dataIngreso = {
+    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'July', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    datasets: [
+      {
+        label: "Dinero Entrando",
+        backgroundColor: '#f87979',
+        data: [1, 2, 3],
+      }
+    ]
+  };
+
+  dataCita = {
+    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'July', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    datasets: [
+      {
+        label: "Citas Pendientes",
+        backgroundColor: '#f87979',
+        data: [1, 2, 3],
+      }
+    ]
+  };
+
+  dataCitaAtendida = {
+    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'July', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    datasets: [
+      {
+        label: "Citas Atendidas",
+        backgroundColor: '#f87979',
+        data: [1, 2, 3],
+      }
+    ]
+  };
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    setTimeout(() => {
+      // Este código se ejecutará después de 2 segundos
+
+      this.dataMedico = {
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'July', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        datasets: [
+          {
+            label: "Medicos Registrandose",
+            backgroundColor: '#f87979',
+            data: this._dashboard?.dashboard?.cantidad_medicos?.dataset,
+          }
+        ]
+      };
+
+
+      this.dataIngreso = {
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'July', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        datasets: [
+          {
+            label: "Dinero Entrando",
+            backgroundColor: '#66ff33',
+            data: this._dashboard?.dashboard.cantidad_ingresos.dataset
+          }
+        ]
+      };
+
+      this.dataCita = {
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'July', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        datasets: [
+          {
+            label: "CitasPendientes",
+            backgroundColor: '#f87979',
+            data: this._dashboard?.dashboard.citas_pendientes.dataset
+          }
+        ]
+      };
+
+      this.dataCitaAtendida = {
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'July', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        datasets: [
+          {
+            label: "Citas Atendidas",
+            backgroundColor: '#f87979',
+            data: this._dashboard?.dashboard.citas_atendidas.dataset
+          }
+        ]
+      };
+
+      // Repite el mismo proceso para otras asignaciones de datos
+    }, 2000); // 2000 milisegundos (2 segundos)
+
+
+  }
+
 
   data: any[] = [];
   options: any[] = [];
   labels = [
-    'January',
+    'Enero',
     'February',
     'March',
     'April',
@@ -36,34 +168,30 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
     'September',
     'October',
     'November',
-    'December',
-    'January',
-    'February',
-    'March',
-    'April'
+    'December'
   ];
   datasets = [
     [{
-      label: 'My First dataset',
+      label: 'Medicos',
       backgroundColor: 'transparent',
       borderColor: 'rgba(255,255,255,.55)',
       pointBackgroundColor: getStyle('--cui-primary'),
       pointHoverBorderColor: getStyle('--cui-primary'),
-      data: [65, 59, 84, 84, 51, 55, 40]
+      data: [1]
     }], [{
-      label: 'My Second dataset',
+      label: 'Ingresos',
       backgroundColor: 'transparent',
       borderColor: 'rgba(255,255,255,.55)',
       pointBackgroundColor: getStyle('--cui-info'),
       pointHoverBorderColor: getStyle('--cui-info'),
-      data: [1, 18, 9, 17, 34, 22, 11]
+      data: [this._dashboard?.dashboard?.cantidad_ingresos?.dataset]
     }], [{
-      label: 'My Third dataset',
+      label: 'Citas Pendientes',
       backgroundColor: 'rgba(255,255,255,.2)',
       borderColor: 'rgba(255,255,255,.55)',
       pointBackgroundColor: getStyle('--cui-warning'),
       pointHoverBorderColor: getStyle('--cui-warning'),
-      data: [78, 81, 80, 45, 34, 12, 40],
+      data: [this._dashboard?.dashboard?.citas_pendientes?.dataset || [2, 1, 55]],
       fill: true
     }], [{
       label: 'My Fourth dataset',
@@ -91,8 +219,8 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
         }
       },
       y: {
-        min: 30,
-        max: 89,
+        min: 0,
+        max: 55,
         display: false,
         grid: {
           display: false
@@ -116,7 +244,6 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
   };
 
   ngOnInit(): void {
-    this.setData();
   }
 
   ngAfterContentInit(): void {
@@ -127,7 +254,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
   setData() {
     for (let idx = 0; idx < 4; idx++) {
       this.data[idx] = {
-        labels: idx < 3 ? this.labels.slice(0, 7) : this.labels,
+        labels: idx < 3 ? this.labels.slice(0, 12) : this.labels,
         datasets: this.datasets[idx]
       };
     }
@@ -143,9 +270,8 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
           break;
         }
         case 1: {
-          options.scales.y.min = -9;
-          options.scales.y.max = 39;
           this.options.push(options);
+
           break;
         }
         case 2: {
@@ -176,7 +302,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 })
 export class ChartSample implements AfterViewInit {
 
-  constructor() {}
+  constructor() { }
 
   @ViewChild('chart') chartComponent!: ChartjsComponent;
 

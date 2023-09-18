@@ -1,0 +1,75 @@
+<!-- facturas-create.component.html -->
+<button class="btn btn-info" (click)="open(content)">Crear Egreso</button>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Crear Factura</h4>
+    <button type="button" class="btn-close" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="egresoForm" (ngSubmit)="guardarFactura()">
+
+      <div class="mb-3">
+        <label for="Cita" class="mr-2">Fecha</label>
+        <input type="date" class="form-control" formControlName="fecha"
+          [(ngModel)]="egreso.fecha" id="fecha" name="fecha" >
+        <div class="invalid-feedback"
+          *ngIf="egresoForm.get('fecha')?.invalid && egresoForm.get('fecha')?.touched">La
+          fecha es obligatoria.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Descripcion</label>
+        <input type="text" class="form-control" formControlName="descripcion"
+          [(ngModel)]="egreso.descripcion">
+        <div class="invalid-feedback"
+          *ngIf="egresoForm.get('descripcion')?.invalid && egresoForm.get('descripcion')?.touched">La
+          descripciones obligatorio.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Metodo de Pago</label>
+        <select class="form-select" formControlName="metodo_pago"
+          [(ngModel)]="egreso.metodo_pago">
+          <option value="Transferencia">Transferencia</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Efectivo">Tarjeta</option>
+
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Precio Unitario</label>
+        <input type="number" class="form-control"
+          formControlName="precio_unitario" [(ngModel)]="egreso.precio_unitario"  (ngModelChange)="calcularTotal()" >
+        <div class="invalid-feedback"
+          *ngIf="egresoForm.get('precio_unitario')?.invalid && egresoForm.get('precio_unitario')?.touched">El
+          precio_unitario es obligatorio.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Cantidad</label>
+        <input type="number" class="form-control"
+          formControlName="cantidad" [(ngModel)]="egreso.cantidad" (ngModelChange)="calcularTotal()" >
+        <div class="invalid-feedback"
+          *ngIf="egresoForm.get('cantidad')?.invalid && egresoForm.get('cantidad')?.touched">El
+          cantidad es obligatorio.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Cliente">Total</label>
+        <input type="number" class="form-control"
+          formControlName="total" [(ngModel)]="egreso.total" readonly [value]="total">
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark"
+          [disabled]="egresoForm.invalid"
+          (click)="modal.close('Save click')">Save</button>
+      </div>
+
+    </form>
+  </div>
+</ng-template>

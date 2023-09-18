@@ -1,14 +1,14 @@
 <c-row>
-  <c-col sm="6" xl="3">
+  <c-col sm="6" xl="6">
     <c-widget-stat-a
       class="mb-4"
       color="primary"
-      title="Users"
+      title="Medicos"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        26K
+        {{ _dashboard?.dashboard?.cantidad_medicos?.total_medicos || '0' }}
         <span class="fs-6 fw-normal">
-          (-12.4% <svg cIcon name="cilArrowBottom"></svg>)
+        <!--  (-12.4% <svg cIcon name="cilArrowBottom"></svg>)-->
         </span>
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
@@ -30,21 +30,21 @@
         </c-dropdown>
       </ng-template>
       <ng-template cTemplateId="widgetChartTemplate">
-        <c-chart [data]="data[0]" [options]="options[0]" class="mt-3 mx-3" height="70" [type]="'line'"></c-chart>
+        <c-chart [data]="dataMedico" class="mt-3 mx-3" height="150" [type]="'line'"></c-chart>
       </ng-template>
     </c-widget-stat-a>
   </c-col>
-  <c-col sm="6" xl="3">
+  <c-col sm="6" xl="6">
     <c-widget-stat-a
-      [title]="'Income'"
+      [title]="'Ingresos'"
       class="mb-4"
       color="info"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>$6.200</span>
-        <span class="fs-6 fw-normal">
-          (40.9%<svg cIcon name="cilArrowTop"></svg>)
-        </span>
+        <span>  ${{ (_dashboard?.dashboard?.cantidad_ingresos?.total_ingresos | number)|| '0'  }}</span>
+        <!--<span class="fs-6 fw-normal">
+          (40.9%<svg cIcon name="cilArrowTop"></svg>
+        </span>!-->
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
@@ -60,21 +60,22 @@
         </c-dropdown>
       </ng-template>
       <ng-template cTemplateId="widgetChartTemplate">
-        <c-chart [data]="data[1]" [options]="options[1]" class="mt-3 mx-3" height="70" type="line"></c-chart>
+        <c-chart [data]="dataIngreso"  class="mt-3 mx-3" height="150" type="line"></c-chart>
       </ng-template>
     </c-widget-stat-a>
   </c-col>
-  <c-col sm="6" xl="3">
+  <c-col sm="6" xl="6">
     <c-widget-stat-a
-      [title]="'Conversion Rate'"
+      [title]="'Citas pendientes'"
       class="mb-4"
       color="warning"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>2.49</span>
-        <span class="fs-6 fw-normal">
+        <span>{{_dashboard?.dashboard?.citas_pendientes?.totalCitasPendientes || '0' }}</span>
+
+        <!-- <span class="fs-6 fw-normal">
           (84.7% <svg cIcon name="cilArrowTop"></svg>)
-        </span>
+        </span> !-->
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
@@ -90,21 +91,21 @@
         </c-dropdown>
       </ng-template>
       <ng-template cTemplateId="widgetChartTemplate">
-        <c-chart [data]="data[2]" [options]="options[2]" class="mt-3" height="70" type="line"></c-chart>
+        <c-chart [data]="dataCita" class="mt-3" height="100" type="line"></c-chart>
       </ng-template>
     </c-widget-stat-a>
   </c-col>
-  <c-col sm="6" xl="3">
+  <c-col sm="6" xl="6">
     <c-widget-stat-a
-      [title]="'Sessions'"
+      [title]="'Citas atendidas'"
       class="mb-4"
-      color="danger"
+      color="success"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>44K</span>
-        <span class="fs-6 fw-normal">
+        <span>{{_dashboard?.dashboard?.citas_atendidas?.totalCitasAtendidas || '0' }}</span>
+        <!-- <span class="fs-6 fw-normal">
           (-23.6% <svg cIcon name="cilArrowBottom"></svg>)
-        </span>
+        </span> -->
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
@@ -120,7 +121,7 @@
         </c-dropdown>
       </ng-template>
       <ng-template cTemplateId="widgetChartTemplate">
-        <c-chart [data]="data[3]" [options]="options[3]" class="mt-3 mx-3" height="70" type="bar"></c-chart>
+        <c-chart [data]="dataCitaAtendida" class="mt-3 mx-3" height="100" type="bar"></c-chart>
       </ng-template>
     </c-widget-stat-a>
   </c-col>

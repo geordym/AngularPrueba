@@ -1,0 +1,31 @@
+<table class="table">
+  <thead class="custom-background">
+    <tr>
+      <th>ID</th>
+      <th>Descripcion</th>
+      <th>Metodo de pago</th>
+      <th>Precio Unitario</th>
+      <th>Cantidad</th>
+      <th>Total</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let egreso of egresos">
+      <td>{{ egreso.id }}</td>
+      <td>{{ egreso.descripcion }}</td>
+      <td>{{ egreso.metodo_pago }}</td>
+      <td> $ {{ egreso.precio_unitario | number}}</td>
+      <td>{{ egreso.cantidad }}</td>
+      <td>$ {{ egreso.total | number }}</td>
+      <td>{{ egreso.fecha }}</td>
+      <td>
+        <button class="btn btn-danger"
+          (click)="(egresosService.eliminarEgreso(egreso.id!))">
+          <svg [cIcon]="icons.cilTrash" width="20" title="Trash Icon"></svg>
+          </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

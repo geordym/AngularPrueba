@@ -1,0 +1,142 @@
+<div
+*ngIf="cita === undefined; else formulario"
+
+class="alert alert-warning text-center">
+  No hay Cita que mostrar
+</div>
+
+<ng-template #formulario>
+
+<div class="container mt-4">
+  <label class="display-4">Observacion</label>
+  <form [formGroup]="formCita" >
+    <div class="row">
+      <!-- Primera fila -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="paciente">Paciente:</label>
+          <input type="text"
+          class="form-control"
+          formControlName="nombre_cliente"
+          id="paciente" placeholder="Nombre del paciente" [(ngModel)]="cita!.nombre_cliente"
+          readonly
+          >
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="dni">DNI:</label>
+          <input type="text"
+          formControlName="dni"
+          readonly
+          class="form-control" id="dni" placeholder="DNI" [(ngModel)]="cita!.cedula">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="edad">Edad:</label>
+          <input type="text"
+          formControlName="edad"
+
+          class="form-control" id="edad" placeholder="Edad" [(ngModel)]="cita!.edad">
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- Repite este patrón para las siguientes filas -->
+
+    <!-- Segunda fila -->
+    <div class="row">
+       <!--  <div class="col-md-4">
+        <div class="form-group">
+          <label for="servicio">Servicio:</label>
+          <input type="text"
+          formControlName="servicio"
+          readonly
+          class="form-control" id="servicio" placeholder="Servicio">
+        </div>
+      </div> -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="especialista">Cedula Medico Asignado:</label>
+          <input type="text"
+          formControlName="cedula_medico"
+          readonly
+          class="form-control" id="especialista" placeholder="Especialista" [(ngModel)]="cita!.cedula_medico_asignado" readonly>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tercera fila -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="presion">Peso (KG):</label>
+          <input type="number"
+          formControlName="peso"
+
+          class="form-control" id="peso" placeholder="Peso" [(ngModel)]="cita!.peso">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="temperatura">Talla (mm)</label>
+          <input type="number"
+          formControlName="talla"
+          class="form-control" id="talla" placeholder="Talla" [(ngModel)]="cita!.talla">
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="temperatura">Temperatura (C)</label>
+          <input type="number"
+          formControlName="temperatura"
+          class="form-control" id="Tenperatura" placeholder="Tenperatura" [(ngModel)]="cita!.temperatura">
+        </div>
+      </div>
+    </div>
+
+     <!-- Tercera fila -->
+     <div class="row">
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="edad">Presion (mmHG):</label>
+          <input type="text"
+          formControlName="presion"
+          class="form-control" id="presion" placeholder="Presion" [(ngModel)]="cita!.presion_arterial">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="presion">Estado:</label>
+          <select class="form-control"
+          formControlName="estado"
+
+          [(ngModel)]="cita!.estado">
+            <option value="P">Pendiente</option>
+            <option value="A">Atendido</option>
+
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Repite este patrón para las siguientes filas -->
+
+    <!-- Sexta fila (botones) -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-primary" (click)="guardar()" [disabled]="formCita.invalid">Guardar</button>
+        <button type="reset" class="btn btn-secondary" (click)="goToHome()">Cancelar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</ng-template>

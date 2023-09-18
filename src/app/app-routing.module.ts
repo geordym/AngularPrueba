@@ -40,6 +40,18 @@ const routes: Routes = [
       },
 
       {
+        path: 'egresos',
+        loadChildren: () =>
+          import('./views/egresos/egresos.module').then((m) => m.EgresosModule)
+      },
+
+      {
+        path: 'citas',
+        loadChildren: () =>
+          import('./views/citas/citas.module').then((m) => m.CitasModule)
+      },
+
+      {
         path: 'theme',
         loadChildren: () =>
           import('./views/theme/theme.module').then((m) => m.ThemeModule)
@@ -104,7 +116,7 @@ const routes: Routes = [
     }
   },
 
-  {path: '**', redirectTo: 'dashboard'}
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 @NgModule({

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Cita } from '../interfaces/cita.interface';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Egreso } from '../interfaces/egreso.interface';
 
 @Injectable({ providedIn: 'root' })
-export class CitasService {
+export class EgresosService {
 
 
 
   constructor(private http: HttpClient) {
 
-    this.cargarCitas();
+    this.cargarEgresos();
   }
 
 
@@ -19,14 +19,14 @@ export class CitasService {
 
 
 
-  private _citas: Cita[] = [];
+  private _egresos: Egreso[] = [];
 
 
-  private serviceUrl: string = 'http://localhost:80/sistemamedicos/citas.php';
+  private serviceUrl: string = 'http://localhost:80/sistemamedicos/egresos.php';
 
 
-  get citas() {
-    return [...this._citas];
+  get egresos() {
+    return [...this._egresos];
   }
 
 
@@ -38,24 +38,24 @@ export class CitasService {
   }
 
 
-  async cargarCitas(): Promise<void> {
+  async cargarEgresos(): Promise<void> {
 
 
     const params = new HttpParams()
       .set('limit', '10')
       .set('q', 'asd');
 
-    this.http.get<Cita[]>(`${this.serviceUrl}`, { params })
+    this.http.get<Egreso[]>(`${this.serviceUrl}`, { params })
       .subscribe(resp => {
 
-        this._citas = resp;
+        this._egresos = resp;
       });
 
 
   }
 
 
-  async eliminarFactura(id: number) {
+  async eliminarEgreso(id: number) {
 
     const params = new HttpParams()
       .set('id', id);
@@ -72,7 +72,7 @@ export class CitasService {
       .toPromise()
       .then(response => {
         // Aquí puedes manejar la respuesta si es necesario
-        this.cargarCitas();
+        this.cargarEgresos();
         return response;
       })
       .catch(error => {
@@ -82,9 +82,9 @@ export class CitasService {
 
   }
 
-  async crearFactura(cita: Cita): Promise<any> {
+  async crearEgreso(egreso: Egreso): Promise<any> {
     // Convierte el objeto 'medico' a una cadena JSON
-    const citaJSON = JSON.stringify(cita);
+    const egresoJSON = JSON.stringify(egreso);
 
     // Define las cabeceras de la solicitud para indicar que se está enviando JSON
     const httpOptions = {
@@ -94,11 +94,11 @@ export class CitasService {
     };
 
     // Realiza la solicitud POST con el cuerpo JSON
-    return this.http.post<string>(`${this.serviceUrl}`, citaJSON, httpOptions)
+    return this.http.post<string>(`${this.serviceUrl}`, egresoJSON, httpOptions)
       .toPromise()
       .then(response => {
         // Aquí puedes manejar la respuesta si es necesario
-        this.cargarCitas();
+        this.cargarEgresos();
         return response;
       })
       .catch(error => {
@@ -108,7 +108,7 @@ export class CitasService {
 
   }
 
-  async editarFactura(cita: Cita): Promise<any> {
+  async editarFactura(cita: Egreso): Promise<any> {
     // Convierte el objeto 'medico' a una cadena JSON
     const citasJSON = JSON.stringify(cita);
 
@@ -124,7 +124,7 @@ export class CitasService {
       .toPromise()
       .then(response => {
         // Aquí puedes manejar la respuesta si es necesario
-        this.cargarCitas();
+        this.cargarEgresos();
         return response;
       })
       .catch(error => {

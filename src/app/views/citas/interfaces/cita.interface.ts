@@ -12,7 +12,8 @@ export interface Cita {
     presion_arterial: number,
     temperatura: number,
     peso: number,
-    talla: string
+    talla: string,
+    fecha: Date
 
 
 }

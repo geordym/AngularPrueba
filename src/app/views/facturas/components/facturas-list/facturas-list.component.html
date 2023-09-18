@@ -1,5 +1,5 @@
 <table class="table">
-  <thead>
+  <thead class="custom-background">
     <tr>
       <th>ID</th>
       <th>Cita</th>
@@ -28,7 +28,7 @@
         <label [ngClass]="factura.estado === 'P' ? 'btn btn-success' : 'btn btn-danger'">
           {{ factura.estado === 'P' ? 'Pagado' : (factura.estado === 'PP' ? 'Pendiente' : 'Estado Desconocido') }} </label>
         </td>
-            <td>{{ factura.precio }}</td>
+            <td>{{ factura.precio | number}}</td>
 
       <td>
         <app-facturas-update [factura]="factura"></app-facturas-update>

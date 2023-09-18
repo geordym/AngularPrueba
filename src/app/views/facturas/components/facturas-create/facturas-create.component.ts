@@ -4,8 +4,7 @@ import { Factura } from '../../interfaces/factura.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FacturasService } from '../../services/facturas.service';
 
-import { Cita } from '../../interfaces/cita.interface';
-import { CitasService } from '../../services/citas.service';
+
 import { Medico } from 'src/app/views/medicos/interfaces/medico.interface';
 
 @Component({

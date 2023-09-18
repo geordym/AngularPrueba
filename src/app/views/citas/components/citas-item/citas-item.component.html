@@ -1,0 +1,25 @@
+<div class="card mb-2">
+  <div class="card-header bg-dark text-white">
+    <h5 class="card-title">Cita {{ cita.fecha | date:
+      'dd/MM/yyyy' }}  <label
+      [ngClass]="cita.estado === 'P' ? 'btn btn-danger' : 'btn btn-success'">
+      {{ cita.estado === 'P' ? 'Pendiente' : (cita.estado === 'A' ?
+      'Atendido' : 'Atendido') }} </label></h5>
+  </div>
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Id:</strong> {{ cita.id }}</li>
+      <li class="list-group-item"><strong>Cedula:</strong> {{
+        cita.cedula
+        }}</li>
+      <li class="list-group-item"><strong>Cliente:</strong> {{
+        cita.nombre_cliente }}</li>
+      <li class="list-group-item"><strong>Cédula Médico:</strong> {{
+        cita.cedula_medico_asignado }}</li>
+      <li class="list-group-item"><strong>Fecha:</strong> {{ cita.fecha | date:
+        'dd/MM/yyyy' }}</li>
+
+        <li class="list-group-item">  <a class="btn btn-info" (click)="visualizarCita(cita.id!)"> <strong>Visualizar</strong> </a>     </li>
+    </ul>
+  </div>
+</div>

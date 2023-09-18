@@ -1,4 +1,38 @@
 
-<app-facturas-search></app-facturas-search>
-<app-facturas-create [medicos]="medicosService.medicos"></app-facturas-create>
-<app-facturas-list [facturas]="facturasService.facturas" [medicos]="medicosService.medicos"></app-facturas-list>
+
+
+
+<div class="container border border-info">
+  <div class="row custom-background">
+
+    <div class="col-md-10">
+      <label class="display-4">Modulo facturas</label>
+
+    </div>
+
+    <div class="col-md-2"> <!-- Cambia el tamaño aquí -->
+
+      <div class="pt-3">
+        <app-facturas-create [medicos]="medicosService.medicos"></app-facturas-create>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-6"> <!-- Cambia el tamaño aquí -->
+     <!--  <app-facturas-search></app-facturas-search>-->
+
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <app-facturas-list [facturas]="facturasService.facturas" [medicos]="medicosService.medicos"></app-facturas-list>
+
+    </div>
+
+  </div>
+</div>
+
+

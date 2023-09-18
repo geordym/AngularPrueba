@@ -10,7 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { FacturasService } from './services/facturas.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CitasService } from './services/citas.service';
+import { CitasService } from '../citas/services/citas.service';
 import { MedicosService } from '../medicos/services/medicos.service';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 
